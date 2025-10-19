@@ -1,5 +1,7 @@
 src/main/resources/application.properties
 src/main/resources/application-dev.properties
+src/main/resources/application-*.properties
+!src/main/resources/application-example.properties
 
 HELP.md
 target/
@@ -34,4 +36,3 @@ build/
 
 ### VS Code ###
 .vscode/
-src/main/resources/application-*.properties
