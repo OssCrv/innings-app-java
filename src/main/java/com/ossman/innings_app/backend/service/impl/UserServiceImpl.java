@@ -1,7 +1,8 @@
 package com.ossman.innings_app.backend.service.impl;
 
-import com.ossman.innings_app.backend.persistence.entity.User;
-import com.ossman.innings_app.backend.persistence.repository.UserRepository;
+import com.ossman.innings_app.backend.domain.model.User;
+import com.ossman.innings_app.backend.domain.model.UserRegistration;
+import com.ossman.innings_app.backend.domain.service.UserDomainService;
 import com.ossman.innings_app.backend.service.UserService;
 import java.util.List;
 import java.util.Optional;
@@ -12,30 +13,25 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository;
+    private final UserDomainService userDomainService;
 
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserServiceImpl(UserDomainService userDomainService) {
+        this.userDomainService = userDomainService;
     }
 
     @Override
     @Transactional
-    public User create(User user) {
-        return userRepository.save(user);
+    public User register(UserRegistration registration) {
+        return userDomainService.register(registration);
     }
 
     @Override
     public Optional<User> findById(Long id) {
-        return userRepository.findById(id);
-    }
-
-    @Override
-    public Optional<User> findByUsername(String username) {
-        return userRepository.findByUsername(username);
+        return userDomainService.findById(id);
     }
 
     @Override
     public List<User> findAll() {
-        return userRepository.findAll();
+        return userDomainService.findAll();
     }
 }
