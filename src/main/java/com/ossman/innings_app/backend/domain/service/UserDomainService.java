@@ -22,14 +22,8 @@ public class UserDomainService {
                             "Username '%s' is already registered".formatted(existing.getUsername()));
                 });
 
-        userRepository.findByEmail(registration.email())
-                .ifPresent(existing -> {
-                    throw new UserAlreadyExistsException(
-                            "Email '%s' is already registered".formatted(existing.getEmail()));
-                });
-
         User aggregate = User.createNew(registration.username(), registration.passwordHash(),
-                registration.email());
+                registration.firstName(), registration.role());
         return userRepository.save(aggregate);
     }
 

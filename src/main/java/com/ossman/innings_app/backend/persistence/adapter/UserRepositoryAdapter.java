@@ -35,11 +35,6 @@ public class UserRepositoryAdapter implements UserRepository {
     }
 
     @Override
-    public Optional<User> findByEmail(String email) {
-        return jpaUserRepository.findByEmail(email).map(UserMapper::toDomain);
-    }
-
-    @Override
     public List<User> findAll() {
         return jpaUserRepository.findAll().stream()
                 .map(UserMapper::toDomain)

@@ -5,9 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -18,35 +16,26 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username", nullable = false, unique = true, length = 50)
+    @Column(name = "user", nullable = false, length = 50)
     private String username;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "pass", nullable = false)
     private String passwordHash;
 
-    @Column(name = "email", nullable = false, unique = true, length = 120)
-    private String email;
+    @Column(name = "first_name", length = 100)
+    private String firstName;
 
-    @Column(name = "enabled", nullable = false)
-    private boolean enabled = true;
-
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
+    @Column(name = "rol", nullable = false, length = 20)
+    private String role;
 
     public UserEntity() {
     }
 
-    public UserEntity(String username, String passwordHash, String email) {
+    public UserEntity(String username, String passwordHash, String firstName, String role) {
         this.username = username;
         this.passwordHash = passwordHash;
-        this.email = email;
-    }
-
-    @PrePersist
-    void onCreate() {
-        if (createdAt == null) {
-            createdAt = LocalDateTime.now();
-        }
+        this.firstName = firstName;
+        this.role = role;
     }
 
     public Long getId() {
@@ -73,28 +62,20 @@ public class UserEntity {
         this.passwordHash = passwordHash;
     }
 
-    public String getEmail() {
-        return email;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public boolean isEnabled() {
-        return enabled;
+    public String getRole() {
+        return role;
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override
@@ -118,9 +99,8 @@ public class UserEntity {
         return "UserEntity{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                ", enabled=" + enabled +
-                ", createdAt=" + createdAt +
+                ", firstName='" + firstName + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }
