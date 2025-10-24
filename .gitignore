@@ -9,6 +9,26 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+# Gradle
+.gradle/
+build/
+out/
+!gradle/wrapper/gradle-wrapper.jar
+.gradle/
+.gradle/**
+build/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Logs
+*.log
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
 ### STS ###
 .apt_generated
 .classpath
